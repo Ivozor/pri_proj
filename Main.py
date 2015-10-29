@@ -5,7 +5,7 @@ import requests  # http://docs.python-requests.org/en/latest/user/quickstart/
 try:
     wikipediaName = input('What Wikipedia page should we browse?\n')
 
-    # STEP 1 - procurar links no texto do artigo
+    # STEP 1 - search for links in the article text
     r = requests.get("https://en.wikipedia.org/wiki/" + wikipediaName)
 
     if r.status_code == requests.codes.ok:
@@ -18,24 +18,25 @@ try:
         else:
             print("There was an error (" + str(r.status_code) + ") fetching Wikipedia page for '" + wikipediaName + "'.")
 
-    #   percorrer o texto do artigo e para cada <a></a> guardar o texto e o href num dicionario(?)
+    # for each <a></a> in the text, save it's content to a dictionary(?)
 
-    # STEP 2 - procurar cada entrada do dicionario no geonames
+    # STEP 2 - search each dictionary(?) entry in geonames
 
     """geonamesName = input("What place do you want to search in Geonames?\n")
     payload = {'q': geonamesName, 'maxRows': '10', 'username': 'ivozor'}
     r2 = requests.get("http://api.geonames.org/search", params=payload)
     print(r2.text)"""
 
-    #   para cada entrada, dependendo do numero de resultados:
-    #       se nao tiver nenhum então abandonar, não será um local;
-    #       se tiver só um guardar no dicionario de coisas a imprimir (nome e coordenadas);
-    #       se tiver mais que uma entrada, para cada uma das entradas:
-    #           ir buscar o conteudo da infobox geography e fazer match:
-    #               se fizer match, guardar no dicionario de coisas a imprimir e fazer break;
-    #               se nao fizer match, abandonar, não será nenhum dos locais
+    #   for each entry, depending on the result array length:
+    #       if there is none, the links doesn't refer to a place;
+    #       if there is one, store in the final dictionary (names and coordinates?);
+    #       if there are several, for each one:
+    #           using the data of the item from geonames:
+    #               search for it in the "infobox geography" div of the article the link refers to:
+    #                   if it matches, store in the final dictionary and break;
+    #                   if there is no match, discard;
 
-    # STEP 3 - imprimir o dicionario de nomes e coordenadas
+    # STEP 3 - print dictionary items
 
 except requests.exceptions.RequestException as ex:
     print("REQUESTS ERROR: " + str(ex))

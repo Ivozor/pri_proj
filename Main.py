@@ -24,7 +24,8 @@ try:
         if r.status_code == 404:
             print("Could not find a Wikipedia page for '" + wikipediaName + "'.")
         else:
-            print("There was an error (" + str(r.status_code) + ") fetching Wikipedia page for '" + wikipediaName + "'.")
+            print(
+                "There was an error (" + str(r.status_code) + ") fetching Wikipedia page for '" + wikipediaName + "'.")
 
     wikipediaPageSoup = BeautifulSoup(wikipediaPageHtml, 'html.parser')
     # STEP 1 - search for links in the article text

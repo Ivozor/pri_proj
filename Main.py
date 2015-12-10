@@ -161,6 +161,7 @@ try:
                                                        src=imageUrl,
                                                        **{'class': 'popup'})
             link.append(newtag)
+
     print("\n### HTML FILE LINKS EDITED ####################################")
 
     # STEP 6 - save HTML file with images on links
